@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
+import { PersonOutline } from '@mui/icons-material'
 
 import axios from "axios";
 import {
@@ -58,7 +59,7 @@ import { Link, useNavigate } from "react-router-dom";
                 <MDBBtn  id='but' outline color="success" className='me-2 '  type="submit" onClick={ ()=>logOut()}>
                   התנתק
                </MDBBtn>
-                 <i  class="far fa-user personallogo" onClick={ ()=>navigate("/personal")} ></i>
+                 <PersonOutline onClick={ ()=>navigate("/personal")} fontSize="large" style={{ cursor: 'pointer' }}/>
                  </div>
                :
                <>
