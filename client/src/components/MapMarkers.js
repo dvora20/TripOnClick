@@ -66,7 +66,7 @@ export default function MapShow() {
     const onMapReady = (map) => {
         const bounds = new window.google.maps.LatLngBounds();
         markers.forEach((marker) => {
-            bounds.extend(new window.google.maps.LatLng(marker.position?.lat, marker.position?.lng));
+            if (marker.position) bounds.extend(new window.google.maps.LatLng(marker.position.lat, marker.position.lng));
         });
         setBounds(bounds);
         setCenter(bounds.getCenter())
@@ -128,7 +128,7 @@ export default function MapShow() {
         var bounds = new window.google.maps.LatLngBounds();
         for (var i = 0; i < markers.length; i++) {
             console.log(markers[i]);
-            bounds.extend(new window.google.maps.LatLng(markers[i].position?.lat, markers[i].position?.lng));
+            if (markers[i].position) bounds.extend(new window.google.maps.LatLng(markers[i].position.lat, markers[i].position.lng));
         }
         var center = bounds.getCenter();
         console.log("THE CENTER")
@@ -148,7 +148,7 @@ export default function MapShow() {
         const markersTemp = [];
         let marker;
 
-        allAttractions.filter(attraction=>attraction.AttractionDetails!==null).forEach((attraction, index) => {
+        allAttractions.filter(attraction=>attraction.AttractionDetails!==null && getPositionOfAttraction(attraction._id)).forEach((attraction, index) => {
             marker = {
                 title: "",
                 name: "",
@@ -203,7 +203,7 @@ export default function MapShow() {
         var bounds = new window.google.maps.LatLngBounds();
         for (var i = 0; i < markers.length; i++) {
             console.log(markers[i])
-            bounds.extend(new window.google.maps.LatLng(markers[i].position?.lat, markers[i].position?.lng));
+            if (markers[i].position) bounds.extend(new window.google.maps.LatLng(markers[i].position.lat, markers[i].position.lng));
         }
         var center = bounds.getCenter();
         console.log("THE CENTER")
@@ -249,7 +249,7 @@ export default function MapShow() {
     const setCenterOfAllMarkers = () => {
         const bounds = new window.google.maps.LatLngBounds();
         markers.forEach((marker) => {
-            bounds.extend(new window.google.maps.LatLng(marker.position?.lat, marker.position?.lng));
+            if (marker.position) bounds.extend(new window.google.maps.LatLng(marker.position.lat, marker.position.lng));
         });
         setBounds(bounds);
         setCenter(bounds.getCenter())
