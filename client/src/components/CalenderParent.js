@@ -209,7 +209,7 @@ import { AppContext } from './context';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import NavButton from './NavButton';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 function CalenderParent(props) {
     const [isReady, setIsReady] = React.useState(false);
     const [plans, setPlans] = React.useState([]);
@@ -218,6 +218,7 @@ function CalenderParent(props) {
     const [tripListener, setTripListener] = useState(false);
     const location = useLocation();
     let trip = location.state.data;
+    const navigate = useNavigate()
 
     const updateTrip = async (tripToUpdate) => {
         console.log("updateTrip in PARENT")
@@ -232,6 +233,7 @@ function CalenderParent(props) {
                 console.log("updated trip")
                 console.log(data)
                 setMyTrip(data);
+                navigate('', { state: { data }})
             }
 
         } catch (ex) {
