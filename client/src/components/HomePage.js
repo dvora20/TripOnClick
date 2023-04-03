@@ -226,7 +226,6 @@ font-size:2rem;
 `;
 
 const HomePageContainer = styled.div`
-background-image: url('C:\TripOnClick-App\trip-on-click-client\src\homePageImg.jpg');
 background-size: cover;
 display: flex;
 margin: auto;

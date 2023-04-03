@@ -106,38 +106,11 @@ export default function MapShow() {
                 return null;
             }
         };
-
-        Promise.all(addresses.map(geocodeAddress)).then(setPositions)
+    const pos = allAttractions
+        .filter(attr => attr.AttractionDetails?.location)
+        .map(attraction => ({ id: attraction._id, ...attraction.AttractionDetails.location }))
+    setPositions(pos)
     }, [addresses]);
-
-
- 
-    const setPositionsOfAddresesFinal = (tmp) => {
-    }
-    const getCenterOfMarkers = () => {
-
-        // const center = {
-        //     lat: positions.reduce((total, pos) => total + pos.lat, 0) / positions.length,
-        //     lng: positions.reduce((total, pos) => total + pos.lng, 0) / positions.length
-        // }
-
-        // console.log("CENTER")
-        // console.log(center);
-        // return center;
-
-        var bounds = new window.google.maps.LatLngBounds();
-        for (var i = 0; i < markers.length; i++) {
-            console.log(markers[i]);
-            if (markers[i].position) bounds.extend(new window.google.maps.LatLng(markers[i].position.lat, markers[i].position.lng));
-        }
-        var center = bounds.getCenter();
-        console.log("THE CENTER")
-        console.log(center.lat());
-        console.log(center.lng());
-        const map = mapRef.current.map;
-        map.setCenter(center);
-
-    }
 
     useEffect(() => {
         if (positions.length === 0 || positions.length != addresses.length) {

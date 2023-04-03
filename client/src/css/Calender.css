@@ -222,6 +222,10 @@ body {
     padding: 2px 20px 2px 20px;
 }
 
+.checkbox {
+    align-items: right;
+}
+
 .calendar {
     display: flex;
     flex-direction: column;

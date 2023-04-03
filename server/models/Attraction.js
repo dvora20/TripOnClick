@@ -13,8 +13,11 @@ const attractionSchema = mongoose.Schema({
     Address : {
         Street : String,
         Number : Number,
-        City : String
-        
+        City : String,
+    },
+    location: {
+        lat: Number,
+        lng: Number
     },
     Area : String,
     Category: String,
