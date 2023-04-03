@@ -107,22 +107,7 @@ export default function MapShow() {
             }
         };
 
-        const geocodeAddresses = async () => {
-            const positionsTmp = [];
-            for (let i = 0; i < addresses.length; i++) {
-                const address = addresses[i];
-                const location = await geocodeAddress(address);
-                positionsTmp.push(location);
-                await new Promise((resolve) => setTimeout(resolve, 50));
-            }
-            if (positionsTmp.length === addresses.length) {
-                setPositions(positionsTmp);
-            }
-        };
-
-        if (addresses.length > 0) {
-            geocodeAddresses();
-        }
+        Promise.all(addresses.map(geocodeAddress)).then(setPositions)
     }, [addresses]);
 
 
