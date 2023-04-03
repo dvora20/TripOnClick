@@ -7,7 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useLocation } from 'react-router-dom';
 import NavButton from './NavButton';
 
-const allMarkersOfTrip = [];
+let allMarkersOfTrip = [];
 export default function MapShow() {
     const location = useLocation();
     const trip = location.state.data;
@@ -118,7 +118,7 @@ export default function MapShow() {
         console.log(positions);
         const markersTemp = [];
         let marker;
-
+        allMarkersOfTrip = []
         allAttractions.filter(attraction=>attraction.AttractionDetails!==null && getPositionOfAttraction(attraction._id)).forEach((attraction, index) => {
             marker = {
                 title: "",
