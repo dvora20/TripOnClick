@@ -75,42 +75,40 @@ export default function MapShow() {
 
 
     useEffect(() => {
-        const geocodeAddress = async (Address) => {
-            try {
-                const address = { address: "" }
-                address.address = Address.address
-                console.log(address);
-                const geocoder = new window.google.maps.Geocoder();
-                let latLng = {
-                    id: "",
-                    lat: 0,
-                    lng: 0
-                }
-                await geocoder.geocode(address, async (results, status) => {
-                    if (status === 'OK') {
-                        const { lat, lng } = await results[0].geometry.location;
-                        latLng.lat = await lat();
-                        latLng.lng = await lng();
-                        latLng.id = Address.id;
-                        console.log("geocodeAddress")
-                        console.log(latLng);
-                    }
-                    else {
-                        throw new Error(`Geocoding failed for address "${address}"`);
-                    }
-                });
-                return latLng;
-            }
-            catch (error) {
-                console.error(error);
-                return null;
-            }
-        };
-    const pos = allAttractions
-        .filter(attr => attr.AttractionDetails?.location)
-        .map(attraction => ({ id: attraction._id, ...attraction.AttractionDetails.location }))
-    setPositions(pos)
-    }, [addresses]);
+        const pos = allAttractions
+            .filter(attr => attr.AttractionDetails?.location)
+            .map(attraction => ({ id: attraction._id, ...attraction.AttractionDetails.location }))
+        setPositions(pos)
+    }, [allAttractions]);
+
+
+ 
+    const setPositionsOfAddresesFinal = (tmp) => {
+    }
+    const getCenterOfMarkers = () => {
+
+        // const center = {
+        //     lat: positions.reduce((total, pos) => total + pos.lat, 0) / positions.length,
+        //     lng: positions.reduce((total, pos) => total + pos.lng, 0) / positions.length
+        // }
+
+        // console.log("CENTER")
+        // console.log(center);
+        // return center;
+
+        var bounds = new window.google.maps.LatLngBounds();
+        for (var i = 0; i < markers.length; i++) {
+            console.log(markers[i]);
+            if (markers[i].position) bounds.extend(new window.google.maps.LatLng(markers[i].position.lat, markers[i].position.lng));
+        }
+        var center = bounds.getCenter();
+        console.log("THE CENTER")
+        console.log(center.lat());
+        console.log(center.lng());
+        const map = mapRef.current.map;
+        map.setCenter(center);
+
+    }
 
     useEffect(() => {
         if (positions.length === 0 || positions.length != addresses.length) {
