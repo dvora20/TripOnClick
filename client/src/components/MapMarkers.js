@@ -1,15 +1,11 @@
-import { ContactSupportOutlined, TripOrigin, TripOriginSharp } from '@mui/icons-material';
-import { Map, GoogleMap, GoogleApiWrapper, Marker, InfoWindow, geocodeByAddress } from 'google-maps-react';
+import { Map, Marker, InfoWindow } from 'google-maps-react';
 import React, { useState, useEffect, useRef } from 'react';
 import "../css/Map.css";
-import { Timeline } from 'antd';
-import { Button, Space } from 'antd';
+import { Button } from 'antd';
 import { CalendarOutlined, ClockCircleOutlined } from '@ant-design/icons'
-import Button2 from "./login/Button";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation } from 'react-router-dom';
 import NavButton from './NavButton';
-// import NavButton from "./NavButton";
 
 const allMarkersOfTrip = [];
 export default function MapShow() {
@@ -70,7 +66,7 @@ export default function MapShow() {
     const onMapReady = (map) => {
         const bounds = new window.google.maps.LatLngBounds();
         markers.forEach((marker) => {
-            bounds.extend(new window.google.maps.LatLng(marker.position.lat, marker.position.lng));
+            bounds.extend(new window.google.maps.LatLng(marker.position?.lat, marker.position?.lng));
         });
         setBounds(bounds);
         setCenter(bounds.getCenter())
@@ -147,7 +143,7 @@ export default function MapShow() {
         var bounds = new window.google.maps.LatLngBounds();
         for (var i = 0; i < markers.length; i++) {
             console.log(markers[i]);
-            bounds.extend(new window.google.maps.LatLng(markers[i].position.lat, markers[i].position.lng));
+            bounds.extend(new window.google.maps.LatLng(markers[i].position?.lat, markers[i].position?.lng));
         }
         var center = bounds.getCenter();
         console.log("THE CENTER")
@@ -203,14 +199,14 @@ export default function MapShow() {
     }, [positions])
 
     const getPositionOfAttraction = (attractionId) => {
-        return positions.find(p => p.id === attractionId);
+        return positions.find(p => p?.id === attractionId)
     }
 
     const getAllMarkersInDate = (day, month) => {
         console.log(allMarkersOfTrip)
         const tmp = allMarkersOfTrip;
         console.log(tmp);
-        tmp.forEach(position => console.log(position.dateMarker.getDate()))
+        tmp.forEach(position => console.log(position?.dateMarker?.getDate()))
         const a = tmp.filter(marker => (marker.dateMarker.getMonth() + 1) == month &&
             marker.dateMarker.getDate() == day);
         console.log(a);
@@ -222,7 +218,7 @@ export default function MapShow() {
         var bounds = new window.google.maps.LatLngBounds();
         for (var i = 0; i < markers.length; i++) {
             console.log(markers[i])
-            bounds.extend(new window.google.maps.LatLng(markers[i].position.lat, markers[i].position.lng));
+            bounds.extend(new window.google.maps.LatLng(markers[i].position?.lat, markers[i].position?.lng));
         }
         var center = bounds.getCenter();
         console.log("THE CENTER")
@@ -268,7 +264,7 @@ export default function MapShow() {
     const setCenterOfAllMarkers = () => {
         const bounds = new window.google.maps.LatLngBounds();
         markers.forEach((marker) => {
-            bounds.extend(new window.google.maps.LatLng(marker.position.lat, marker.position.lng));
+            bounds.extend(new window.google.maps.LatLng(marker.position?.lat, marker.position?.lng));
         });
         setBounds(bounds);
         setCenter(bounds.getCenter())
